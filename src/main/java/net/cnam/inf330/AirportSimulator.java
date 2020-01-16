@@ -1,5 +1,6 @@
 package net.cnam.inf330;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -15,13 +16,16 @@ public class AirportSimulator {
     private int tick;
     private int planeCount;
     // TODO 1.a) Declare a PriorityQueue to store the flying planes waiting to land
+    private PriorityQueue<Plane> flyingPlanes;
     //private ... flyingPlanes;
     // TODO 1.b) Declare a Queue (LinkedList) to store the landed planes waiting to take off
+    private LinkedList landedPlanes = new LinkedList();
     //private ... landedPlanes;
 
     public AirportSimulator() {
         this.tick = 1;
         this.planeCount = 0;
+        this.flyingPlanes = new PriorityQueue(11, new PlaneFuelComparator());
         //...
     }
 
@@ -94,7 +98,7 @@ public class AirportSimulator {
         while ((!landedPlanes.isEmpty() || !flyingPlanes.isEmpty()) && numRunwaysUsed < NUM_RUNWAYS) {
             // If there are more landed planes than flying planes, fly planes
             if (landedPlanes.size() > flyingPlanes.size()) {
-                Plane planeToTakeOff = landedPlanes.poll();
+                Plane planeToTakeOff = (Plane) landedPlanes.poll();
                 planeToTakeOff.takeOff(numRunwaysUsed);
             }
             // Otherwise, land planes
@@ -121,9 +125,10 @@ public class AirportSimulator {
      * @param flying
      */
     // TODO 4. Throw an InvalidFuelCapacityException when fuelCapacity is negative
-    private void createPlane(int fuelCapacity, boolean flying) {
+    private void createPlane(int fuelCapacity, boolean flying){
+
         String name = "Plane" + planeCount++;
-        Plane plane = new Plane(this.tick, name, flying, fuelCapacity);
+        Plane plane = new NormalPlane(this.tick, name, flying, fuelCapacity);
         System.out.println("Created plane : " + name + " (" + fuelCapacity + ", " +
                 (flying ? "air" : "ground") + ")");
         if (flying)

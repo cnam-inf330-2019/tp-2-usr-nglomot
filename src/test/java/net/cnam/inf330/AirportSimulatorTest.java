@@ -12,6 +12,11 @@ public class AirportSimulatorTest {
 
     // TODO 2. Write a method for testing the PriorityQueue
     //...
+    @Test
+    public void testPriorityQueue(){
+        AirportSimulator simulator = new AirportSimulator();
+
+    }
 
     /* TODO 5. Complete this method for testing the InvalidFuelCapacityException in the
         AirportSimulator::createPlane method
@@ -22,6 +27,12 @@ public class AirportSimulatorTest {
         ThrowingRunnable tr = () -> simulator.simulateTurnWithNewPlanes(3, 3, new int[]{1, 1, -1});
 
         //assertThrows(...);
+    }
+
+    @Test
+    public void testCreatePlane(){
+        AirportSimulator simulator = new AirportSimulator();
+        assertThrows();
     }
 
     @Test
