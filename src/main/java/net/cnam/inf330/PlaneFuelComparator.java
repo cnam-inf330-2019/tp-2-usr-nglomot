@@ -6,9 +6,11 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
+// FIXME Type parameter missing (should be Plane)
 public class PlaneFuelComparator implements Comparator {
     @Override
     public int compare(Plane p, Plane p1) {
+        // FIXME Missing implementation
         return 0;
     }
 
